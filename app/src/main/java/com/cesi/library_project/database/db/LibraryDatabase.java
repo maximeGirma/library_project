@@ -1,5 +1,6 @@
-package com.cesi.library_project.database.controllers;
+package com.cesi.library_project.database.db;
 
+import com.cesi.library_project.database.controllers.CategoryController;
 import com.cesi.library_project.database.models.Category;
 import za.co.neilson.sqlite.orm.DatabaseDriverInterface;
 import za.co.neilson.sqlite.orm.DatabaseInfo;
@@ -53,6 +54,8 @@ public class LibraryDatabase extends DatabaseModel<ResultSet, HashMap<String, Ob
 
     @Override
     protected void onInsertDefaultValues() {
+        CategoryController.getInstance().init(this);
+
         Category[] categories = new Category[]{
                 new Category("Film"),
                 new Category("Musique"),
@@ -60,12 +63,8 @@ public class LibraryDatabase extends DatabaseModel<ResultSet, HashMap<String, Ob
                 new Category("Jeux-Vidéo")
         };
 
-        try {
-            for (Category category : categories) {
-                getObjectModel(Category.class).insert(category);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (Category category : categories) {
+            CategoryController.getInstance().create(category);
         }
     }
 }
