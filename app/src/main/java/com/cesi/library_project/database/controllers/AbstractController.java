@@ -1,6 +1,5 @@
 package com.cesi.library_project.database.controllers;
 
-import com.cesi.library_project.database.models.Category;
 import com.sun.istack.internal.NotNull;
 import za.co.neilson.sqlite.orm.ObjectModel;
 

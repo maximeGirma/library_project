@@ -9,10 +9,8 @@ import za.co.neilson.sqlite.orm.jdbc.JdbcObjectModel;
 import za.co.neilson.sqlite.orm.jdbc.JdbcSqliteDatabaseDriverInterface;
 
 import java.lang.reflect.Type;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LibraryDatabase extends DatabaseModel<ResultSet, HashMap<String, Object>> {
