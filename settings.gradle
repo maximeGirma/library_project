@@ -1,0 +1,4 @@
+include ':app'
+include ':linux'
+include ':macos'
+include ':windows'
