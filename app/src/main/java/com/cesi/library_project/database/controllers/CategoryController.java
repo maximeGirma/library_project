@@ -1,6 +1,7 @@
 package com.cesi.library_project.database.controllers;
 
 import com.cesi.library_project.database.models.Category;
+import com.sun.istack.internal.NotNull;
 
 public class CategoryController extends AbstractController<Category> {
     private static final CategoryController CATEGORY_CONTROLLER = new CategoryController();
@@ -13,6 +14,7 @@ public class CategoryController extends AbstractController<Category> {
         super();
     }
 
+    @NotNull
     @Override
     protected Class<Category> getModelClass() {
         return Category.class;
