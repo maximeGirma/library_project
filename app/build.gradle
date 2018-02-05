@@ -23,6 +23,11 @@ sourceSets {
         resources { srcDir "resources" }
         compileClasspath += sourceSets.main.runtimeClasspath
     }
+    linux64 {
+        java { srcDir "src" }
+        resources { srcDir "resources" }
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
     macos {
         java { srcDir "src" }
         resources { srcDir "resources" }
@@ -57,7 +62,7 @@ dependencies {
 
 def sources = [
         sourceSets.linux,
-        sourceSets.linux,
+        sourceSets.linux64,
         sourceSets.macos,
         sourceSets.windows
 ]
@@ -94,8 +99,11 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 }
 
 names.eachWithIndex { name, number ->
+
     task "execute${name}" (type:JavaExec) {
-        jvmArgs args[number]
+        System.out.println("having main" + mainClassName)
+
+        if ( args[number] != "" ) jvmArgs args[number]
         main = mainClassName
         classpath = sources[number].runtimeClasspath
     }
