@@ -69,6 +69,13 @@ def compiles = [
         configurations.windowsCompile
 ]
 
+def args = [
+        "",
+        "",
+        "-XstartOnFirstThread",
+        ""
+]
+
 def names = ["Linux", "Linux64", "Macos", "Windows"]
 
 
@@ -88,7 +95,7 @@ if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 
 names.eachWithIndex { name, number ->
     task "execute${name}" (type:JavaExec) {
-        jvmArgs "-XstartOnFirstThread"
+        jvmArgs args[number]
         main = mainClassName
         classpath = sources[number].runtimeClasspath
     }
