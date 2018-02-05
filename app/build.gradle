@@ -32,6 +32,7 @@ sourceSets {
 
 configurations {
     linuxCompile { extendsFrom compile }
+    linux64Compile { extendsFrom compile }
     macosCompile { extendsFrom compile }
     windowsCompile { extendsFrom compile }
 }
@@ -44,6 +45,7 @@ dependencies {
     //specific swt version according to the OS
     macosCompile fileTree(dir: 'libs', include: 'macos_swt.jar')
     linuxCompile fileTree(dir: 'libs', include: 'linux_swt.jar')
+    linux64Compile fileTree(dir: 'libs', include: 'linux64_swt.jar')
     windowsCompile fileTree(dir: 'libs', include: 'windows_swt.jar')
 
     //indication de récupérer un fichier spécifique durant la phrase de compilation
@@ -55,17 +57,19 @@ dependencies {
 
 def sources = [
         sourceSets.linux,
+        sourceSets.linux,
         sourceSets.macos,
         sourceSets.windows
 ]
 
 def compiles = [
         configurations.linuxCompile,
+        configurations.linux64Compile,
         configurations.macosCompile,
         configurations.windowsCompile
 ]
 
-def names = ["Linux", "Macos", "Windows"]
+def names = ["Linux", "Linux64", "Macos", "Windows"]
 
 
 if (Os.isFamily(Os.FAMILY_WINDOWS)) {
