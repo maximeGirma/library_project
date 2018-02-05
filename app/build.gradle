@@ -1,3 +1,6 @@
+//since windows' intellij seems to have issues with sources
+import org.apache.tools.ant.taskdefs.condition.Os
+
 apply plugin: 'application'
 apply plugin: 'java'
 
@@ -10,17 +13,17 @@ sourceSets {
         java { srcDir "src" }
         resources { srcDir "resources" }
     }
+    windows {
+        java { srcDir "src" }
+        resources { srcDir "resources" }
+        compileClasspath += sourceSets.main.runtimeClasspath
+    }
     linux {
         java { srcDir "src" }
         resources { srcDir "resources" }
         compileClasspath += sourceSets.main.runtimeClasspath
     }
     macos {
-        java { srcDir "src" }
-        resources { srcDir "resources" }
-        compileClasspath += sourceSets.main.runtimeClasspath
-    }
-    windows {
         java { srcDir "src" }
         resources { srcDir "resources" }
         compileClasspath += sourceSets.main.runtimeClasspath
@@ -62,7 +65,24 @@ def compiles = [
         configurations.windowsCompile
 ]
 
-["Linux", "Macos", "Windows"].eachWithIndex { name, number ->
+def names = ["Linux", "Macos", "Windows"]
+
+
+if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+    println "*** WINDOWS detected, implementing workarounds"
+
+    sources = [
+            sourceSets.windows
+    ]
+
+    compiles = [
+            configurations.windowsCompile
+    ]
+
+    names = [ "Windows" ]
+}
+
+names.eachWithIndex { name, number ->
     task "execute${name}" (type:JavaExec) {
         jvmArgs "-XstartOnFirstThread"
         main = mainClassName
