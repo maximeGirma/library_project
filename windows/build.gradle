@@ -1,0 +1,29 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+def MAIN_TITLE = 'LibraryProject'
+def MAIN_VERSION = '1.0'
+mainClassName = 'com.cesi.library_project.Main'
+
+sourceSets {
+    main {
+        java {
+            srcDir '../app/src/main/java'
+        }
+        resources {
+            srcDir '../app/src/main/java'
+        }
+    }
+}
+
+dependencies {
+
+    //specific swt version according to the OS
+    compile fileTree(dir: '../app/libs', include: 'windows_swt.jar')
+
+    //indication de récupérer un fichier spécifique durant la phrase de compilation
+    compile files('../app/libs/sqlite-jdbc-3.21.0.jar')
+    compile files('../app/libs/SQLiteDatabaseModel-Core-1.0.jar')
+    compile files('../app/libs/SQLiteDatabaseModel-Jdbc-1.0.jar')
+    compile 'org.checkerframework:checker:2.1.12'
+}
