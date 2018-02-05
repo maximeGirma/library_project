@@ -1,5 +1,7 @@
 package com.cesi.library_project.database.controllers;
 
+import com.cesi.library_project.database.db.LibraryDatabase;
+
 import java.util.List;
 
 public interface ICRUD<A_MODEL_CLASS> {
